@@ -1,0 +1,26 @@
+configuracion_global:
+  # El benchmark sobreescribe el log con --log; este valor es solo de referencia.
+  ruta_log: "./data/01_raw/resource_utilization/Caso_B/TP_sudden_caso_b_5000.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Marta"  # ground truth: el recurso que cambia (validación por recurso)
+  ventana:
+    tipo: 'temporal'
+    tamano_ventana: __TAMANO_VENTANA__
+    salto_ventana: __SALTO_VENTANA__
+    fecha_inicial: null
+    autoajuste: false
+
+perspectivas:
+  - nombre: "resource_utilization"
+    op_filtrado:
+      - "filtrado_resource_utilization"
+    op_transformaciones:
+      - "transformacion_resource_utilization"
+    metricas:
+      - "resource_utilization"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: __N_REGRESION__
+    n_confirmacion: __N_CONFIRMACION__
+    avance: "normal"

@@ -1,0 +1,129 @@
+{
+  "task_resource_distribution": [
+    {
+      "task_id": "Activity_1aq3ph1",
+      "resources": [
+        {
+          "resource_id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "Activity_1ywruq1",
+      "resources": [
+        {
+          "resource_id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "Activity_0ujy0c9",
+      "resources": [
+        {
+          "resource_id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "Activity_1v602x8",
+      "resources": [
+        {
+          "resource_id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "Activity_13udn2w",
+      "resources": [
+        {
+          "resource_id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    }
+  ],
+  "resource_calendars": [
+    {
+      "id": "sid-ff3fafe3-9f2c-4452-a443-e488935c420b",
+      "name": "default schedule",
+      "time_periods": [
+        {
+          "from": "MONDAY",
+          "to": "SUNDAY",
+          "beginTime": "00:00:00.000",
+          "endTime": "23:59:59.999"
+        }
+      ]
+    }
+  ],
+  "gateway_branching_probabilities": [],
+  "arrival_time_distribution": {
+    "distribution_name": "norm",
+    "distribution_params": [
+      { "value": 1800 },
+      { "value": 1500 },
+      { "value": 0 },
+      { "value": 20000 }
+    ]
+  },
+  "arrival_time_calendar": [
+    {
+      "from": "MONDAY",
+      "to": "FRIDAY",
+      "beginTime": "08:00:00.583",
+      "endTime": "18:00:00.638"
+    }
+  ],
+  "resource_profiles": [
+    {
+      "id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9",
+      "name": "Default resource profile",
+      "resource_list": [
+        {
+          "id": "sid-ee6c83c9-0a07-40b0-ad39-9b923119b9a9_1",
+          "name": "Default resource profile 1",
+          "cost_per_hour": 0,
+          "amount": 100000,
+          "calendar": "sid-ff3fafe3-9f2c-4452-a443-e488935c420b",
+          "assignedTasks": []
+        }
+      ]
+    }
+  ],
+  "event_distribution": [],
+  "batch_processing": []
+}

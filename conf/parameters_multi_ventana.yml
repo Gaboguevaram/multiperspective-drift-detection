@@ -1,0 +1,41 @@
+configuracion_global:
+  ruta_log: "./data/01_raw/resource_utilization/Caso_B/TP_sudden_caso_b_5000.csv"
+  debug: true
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+
+perspectivas:
+  - nombre: "resource_utilization"
+    ventana:
+        tipo: 'temporal'
+        tamano_ventana: "10 days"
+        salto_ventana: "1 hour"
+        fecha_inicial: null
+    op_filtrado:
+      - "filtrado_resource_utilization"
+    op_transformaciones:
+      - "transformacion_resource_utilization"
+    metricas:
+      - "resource_utilization"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 70
+    n_confirmacion: 140
+    avance: "normal"
+    
+  - nombre: "resource_productivity"
+    ventana:
+      tipo: 'temporal'
+      tamano_ventana: "5 days"
+      salto_ventana: "1 hour"
+      fecha_inicial: null
+    op_filtrado:
+      - "filtrado_resource_productivity"
+    op_transformaciones:
+      - "transformacion_resource_productivity"
+    modelo: "modelo_resource_productivity"
+    metricas:
+      - "comparar_distribuciones"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 70
+    n_confirmacion: 140
+    avance: "normal"

@@ -1,0 +1,29 @@
+configuracion_global:
+  # El benchmark sobreescribe el log con --log; este valor es solo de referencia.
+  ruta_log: "./data/01_raw/arrival_rate/Caso_A/N-1800-1500-900-750_sudden_5000.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  ventana:
+      tipo: 'temporal'
+      tamano_ventana: __TAMANO_VENTANA__
+      salto_ventana: __SALTO_VENTANA__
+      fecha_inicial: null
+
+perspectivas:
+  # Perspectiva: Service Rate (template con placeholders)
+  - nombre: "service_rate"
+    op_filtrado:
+      - "filtrado_service_rate"
+    op_transformaciones:
+      - "transformacion_service_rate"
+    frecuencia_service_rate: __FRECUENCIA_SERVICE_RATE__
+    granularidad_service_rate: __GRANULARIDAD_SERVICE_RATE__
+    modelo: "modelo_service_rate"
+    metrica_validacion_modelo: "MAE"
+    metricas:
+      - "MAE"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: __N_REGRESION__
+    n_confirmacion: __N_CONFIRMACION__
+    avance: "normal"

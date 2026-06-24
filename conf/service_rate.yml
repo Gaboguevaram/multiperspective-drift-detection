@@ -1,0 +1,28 @@
+configuracion_global:
+  ruta_log: "./data/01_raw/arrival_rate/AR-A/ar_a-5000-single.csv"
+  debug: true
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  ventana:
+      tipo: 'temporal'
+      tamano_ventana: '10 days'
+      salto_ventana: '18 hours'
+      fecha_inicial: null
+
+perspectivas:
+  # Perspectiva: Service Rate
+  - nombre: "service_rate"
+    op_filtrado:
+      - "filtrado_service_rate"
+    op_transformaciones:
+      - "transformacion_service_rate"
+    frecuencia_service_rate: '30 min'
+    granularidad_service_rate: '1 day'
+    modelo: "modelo_service_rate"
+    metrica_validacion_modelo: "MAE"
+    metricas:
+      - "MAE"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 35
+    n_confirmacion: 70
+    avance: "normal"

@@ -1,0 +1,29 @@
+configuracion_global:
+  # El benchmark sobreescribe el log con --log; este valor es solo de referencia.
+  ruta_log: "./data/01_raw/resource_productivity/Caso_E/log_productivity_sudden_caso_e_5000.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Carlos"  # ground truth: el recurso que cambia
+  tareas_esperadas: ['A', 'C', 'E']  # ground truth: las tareas (del recurso) cuya dispersión cambia; B y D son control
+  ventana:
+    tipo: 'temporal'
+    tamano_ventana: __TAMANO_VENTANA__
+    salto_ventana: __SALTO_VENTANA__
+    fecha_inicial: null
+    autoajuste: false
+
+perspectivas:
+  # Resource productivity por DISTANCIA (Wasserstein) + regresión.
+  - nombre: "resource_productivity"
+    op_filtrado:
+      - "filtrado_resource_productivity"
+    op_transformaciones:
+      - "transformacion_resource_productivity"
+    modelo: "modelo_resource_productivity"
+    metricas:
+      - "comparar_distribuciones"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: __N_REGRESION__
+    n_confirmacion: __N_CONFIRMACION__
+    avance: "normal"
