@@ -1,0 +1,224 @@
+{
+  "task_resource_distribution": [
+    {
+      "task_id": "A",
+      "resources": [
+        {
+          "resource_id": "resource_carlos",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 50 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_sandra",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 50 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_pedro",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 50 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "B",
+      "resources": [
+        {
+          "resource_id": "resource_carlos",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 150 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_sandra",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 150 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_pedro",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 150 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "C",
+      "resources": [
+        {
+          "resource_id": "resource_carlos",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_sandra",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_pedro",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "D",
+      "resources": [
+        {
+          "resource_id": "resource_carlos",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        },
+        {
+          "resource_id": "resource_sandra",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        },
+        {
+          "resource_id": "resource_pedro",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "E",
+      "resources": [
+        {
+          "resource_id": "resource_carlos",
+          "distribution_name": "uniform",
+          "distribution_params": [
+            { "value": 200 },
+            { "value": 600 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_sandra",
+          "distribution_name": "uniform",
+          "distribution_params": [
+            { "value": 200 },
+            { "value": 600 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_pedro",
+          "distribution_name": "uniform",
+          "distribution_params": [
+            { "value": 200 },
+            { "value": 600 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    }
+  ],
+  "resource_calendars": [
+    {
+      "id": "calendar_main",
+      "name": "default schedule",
+      "time_periods": [
+        {
+          "from": "MONDAY",
+          "to": "SUNDAY",
+          "beginTime": "00:00:00.000",
+          "endTime": "23:59:59.999"
+        }
+      ]
+    }
+  ],
+  "gateway_branching_probabilities": [],
+  "arrival_time_distribution": {
+    "distribution_name": "expon",
+    "distribution_params": [
+      { "value": 30 },
+      { "value": 1 },
+      { "value": 20000 },
+      { "value": 0 }
+    ]
+  },
+  "arrival_time_calendar": [
+    {
+      "from": "MONDAY",
+      "to": "SUNDAY",
+      "beginTime": "00:00:00.000",
+      "endTime": "23:59:59.999"
+    }
+  ],
+  "resource_profiles": [
+    {
+      "id": "resource_profile_main",
+      "name": "Default resource profile",
+      "resource_list": [
+        { "id": "resource_carlos", "name": "Carlos", "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_sandra", "name": "Sandra", "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_pedro",  "name": "Pedro",  "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] }
+      ]
+    }
+  ],
+  "event_distribution": [],
+  "batch_processing": []
+}

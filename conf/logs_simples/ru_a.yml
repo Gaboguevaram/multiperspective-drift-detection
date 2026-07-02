@@ -1,0 +1,25 @@
+configuracion_global:
+  # RU-A (servicio más lento de Marta -> sube su utilización; Carlos control). Caso B.
+  ruta_log: "./data/01_raw/resource_utilization/RU-A/ru_a-5000-single.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Marta"  # ground truth: el recurso que cambia
+  ventana:
+    tipo: 'temporal'
+    tamano_ventana: "10 days"
+    salto_ventana: "1 hour"
+    fecha_inicial: null
+
+perspectivas:
+  - nombre: "resource_utilization"
+    op_filtrado:
+      - "filtrado_resource_utilization"
+    op_transformaciones:
+      - "transformacion_resource_utilization"
+    metricas:
+      - "resource_utilization"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 70
+    n_confirmacion: 140
+    avance: "normal"

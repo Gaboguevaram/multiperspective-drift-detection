@@ -1,0 +1,27 @@
+configuracion_global:
+  # CAL-A (reducción de jornada -> cae el soporte inverso). Caso D: Marta L-D->L-V, Carlos constante.
+  ruta_log: "./data/01_raw/calendar/CAL-A/cal_a-5000-single.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Marta"  # ground truth: el recurso que cambia
+
+perspectivas:
+  - nombre: "calendar"
+    ventana:
+      tipo: 'temporal'
+      tamano_ventana: "7 days"
+      salto_ventana: "4 hours"
+      fecha_inicial: null
+    op_filtrado:
+      - "filtrado_calendarios"
+    op_transformaciones:
+      - "transformacion_calendarios"
+    modelo: "modelo_calendarios"
+    metricas:
+      - "soporte"
+      - "soporte_inverso"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 75
+    n_confirmacion: 150
+    avance: "normal"

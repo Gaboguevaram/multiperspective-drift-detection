@@ -1,0 +1,72 @@
+/docs
+
+# --- Datos ---
+/data/02_intermediate
+/data/03_primary
+/data/04_feature
+/data/05_model_input
+/data/06_models
+/data/07_model_output
+/data/08_reporting
+
+# --- Extras ---
+/tests/arrival_rate/figura_trayectoria.py
+/tests/calendar/figura_trayectoria.py
+/tests/service_rate/figura_trayectoria.py
+/tests/control_flow/figura_trayectoria.py
+/tests/resource_productivity/figura_trayectoria.py
+/tests/resource_utilization/figura_trayectoria.py
+/tests/mosaico_trayectorias.py
+
+# --- Auxiliares ---
+*.txt
+
+# --- Python/Build ---
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.eggs/
+
+# --- Salida ---
+/logs/*
+!/logs/.gitkeep
+/resultados/*
+!/resultados/.gitkeep
+
+/conf/pruebas/*
+!/conf/pruebas/.gitkeep
+optimizacion_calendar
+optimizacion_arrival_rate
+prompt.md
+Anotaciones.md
+
+# --- LaTeX ---
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.out
+*.nav
+*.snm
+*.vrb
+*-eps-converted-to.pdf
+
+# --- Python cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.env
+.venv

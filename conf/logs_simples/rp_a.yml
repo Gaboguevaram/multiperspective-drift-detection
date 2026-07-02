@@ -1,0 +1,28 @@
+configuracion_global:
+  # RP-A (cambio de dispersión de tareas de Carlos -> cambia su productividad).
+  ruta_log: "./data/01_raw/resource_productivity/RP-A/rp_a-5000-single.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Carlos"  # ground truth: el recurso que cambia
+  tareas_esperadas: ['A', 'C', 'E']  # ground truth: las tareas (del recurso) cuya dispersión cambia. B y D son control
+  ventana:
+    tipo: 'temporal'
+    tamano_ventana: '30 days'
+    salto_ventana: '2 days'
+    fecha_inicial: null
+    autoajuste: false
+
+perspectivas:
+  - nombre: "resource_productivity"
+    op_filtrado:
+      - "filtrado_resource_productivity"
+    op_transformaciones:
+      - "transformacion_resource_productivity"
+    modelo: "modelo_resource_productivity"
+    metricas:
+      - "comparar_distribuciones"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 40
+    n_confirmacion: 15
+    avance: "normal"

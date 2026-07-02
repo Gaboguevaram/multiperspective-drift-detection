@@ -1,0 +1,229 @@
+{
+  "task_resource_distribution": [
+    {
+      "task_id": "A",
+      "resources": [
+        {
+          "resource_id": "resource_ana",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 200 },
+            { "value": 30 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_bruno",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 150 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_carla",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 250 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "B",
+      "resources": [
+        {
+          "resource_id": "resource_diego",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 300 },
+            { "value": 30000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_elena",
+          "distribution_name": "uniform",
+          "distribution_params": [
+            { "value": 100 },
+            { "value": 500 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_fer",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "C",
+      "resources": [
+        {
+          "resource_id": "resource_ana",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        },
+        {
+          "resource_id": "resource_diego",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 600 },
+            { "value": 250 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_gloria",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "D",
+      "resources": [
+        {
+          "resource_id": "resource_bruno",
+          "distribution_name": "uniform",
+          "distribution_params": [
+            { "value": 200 },
+            { "value": 700 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_elena",
+          "distribution_name": "gamma",
+          "distribution_params": [
+            { "value": 400 },
+            { "value": 80000 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_hugo",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 500 },
+            { "value": 100 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "E",
+      "resources": [
+        {
+          "resource_id": "resource_carla",
+          "distribution_name": "lognorm",
+          "distribution_params": [
+            { "value": 700 },
+            { "value": 300 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        },
+        {
+          "resource_id": "resource_fer",
+          "distribution_name": "expon",
+          "distribution_params": [
+            { "value": 500 },
+            { "value": 0 },
+            { "value": 20000 },
+            { "value": 0 }
+          ]
+        },
+        {
+          "resource_id": "resource_hugo",
+          "distribution_name": "norm",
+          "distribution_params": [
+            { "value": 600 },
+            { "value": 150 },
+            { "value": 0 },
+            { "value": 20000 }
+          ]
+        }
+      ]
+    }
+  ],
+  "resource_calendars": [
+    {
+      "id": "calendar_main",
+      "name": "default schedule",
+      "time_periods": [
+        {
+          "from": "MONDAY",
+          "to": "SUNDAY",
+          "beginTime": "00:00:00.000",
+          "endTime": "23:59:59.999"
+        }
+      ]
+    }
+  ],
+  "gateway_branching_probabilities": [],
+  "arrival_time_distribution": {
+    "distribution_name": "expon",
+    "distribution_params": [
+      { "value": 30 },
+      { "value": 1 },
+      { "value": 20000 },
+      { "value": 0 }
+    ]
+  },
+  "arrival_time_calendar": [
+    {
+      "from": "MONDAY",
+      "to": "SUNDAY",
+      "beginTime": "00:00:00.000",
+      "endTime": "23:59:59.999"
+    }
+  ],
+  "resource_profiles": [
+    {
+      "id": "resource_profile_main",
+      "name": "Default resource profile",
+      "resource_list": [
+        { "id": "resource_ana",    "name": "Ana",    "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_bruno",  "name": "Bruno",  "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_carla",  "name": "Carla",  "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_diego",  "name": "Diego",  "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_elena",  "name": "Elena",  "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_fer",    "name": "Fer",    "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_gloria", "name": "Gloria", "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] },
+        { "id": "resource_hugo",   "name": "Hugo",   "cost_per_hour": 0, "amount": 1, "calendar": "calendar_main", "assignedTasks": [] }
+      ]
+    }
+  ],
+  "event_distribution": [],
+  "batch_processing": []
+}

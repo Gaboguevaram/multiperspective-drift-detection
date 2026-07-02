@@ -1,0 +1,29 @@
+configuracion_global:
+  # ruta_log se ignora: test_perspectivas pasa el log cargado al orquestador.
+  ruta_log: "./data/01_raw/calendar/CAL-B/cal_b-5000-single.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Marta"  # ground truth: el recurso que cambia (validación por recurso)
+  ventana:
+      tipo: 'temporal'
+      tamano_ventana: __TAMANO_VENTANA__
+      salto_ventana: __SALTO_VENTANA__
+      fecha_inicial: null
+      autoajuste: false
+
+perspectivas:
+  # Perspectiva: Calendar (template con placeholders)
+  - nombre: "calendar"
+    op_filtrado:
+      - "filtrado_calendarios"
+    op_transformaciones:
+      - "transformacion_calendarios"
+    modelo: "modelo_calendarios"
+    metricas:
+      - "soporte"
+      - "soporte_inverso"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: __N_REGRESION__
+    n_confirmacion: __N_CONFIRMACION__
+    avance: "normal"

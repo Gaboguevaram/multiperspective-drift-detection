@@ -1,0 +1,27 @@
+configuracion_global:
+  # CAL-B (ampliación de jornada -> cae el soporte). Caso C: Marta L-V->L-D, Carlos constante.
+  ruta_log: "./data/01_raw/calendar/CAL-B/cal_b-5000-single.csv"
+  debug: false
+  primera_tarea: 'A'
+  ultima_tarea: 'E'
+  recurso_esperado: "Marta"  # ground truth: el recurso que cambia
+
+perspectivas:
+  - nombre: "calendar"
+    ventana:
+      tipo: 'temporal'
+      tamano_ventana: "14 days"
+      salto_ventana: "6 hours"
+      fecha_inicial: null
+    op_filtrado:
+      - "filtrado_calendarios"
+    op_transformaciones:
+      - "transformacion_calendarios"
+    modelo: "modelo_calendarios"
+    metricas:
+      - "soporte"
+      - "soporte_inverso"
+    op_det_concept_drift: "deteccion_regresion"
+    n_regresion: 55
+    n_confirmacion: 110
+    avance: "normal"
