@@ -60,6 +60,26 @@ def setup_logging(
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
+    # Silenciar el ruido de las librerías de terceros, que de otro modo oculta por
+    # completo la salida del framework:
+    #
+    # - httpx/httpcore: registran una línea por cada petición al servidor temporal
+    #   de Prefect, es decir, una por cada mensaje de log emitido.
+    # - prefect.events.utilities y prefect._internal.concurrency: el servicio de
+    #   telemetría de eventos falla al arrancar y al apagarse el servidor efímero
+    #   ("Service 'EventsWorker' failed...", "Cannot put items in a stopped service
+    #   instance"), registrando un traceback completo por evento (cientos en una
+    #   ejecución normal). Son inofensivos —esos eventos solo alimentan la interfaz
+    #   de Prefect, que en modo efímero se descarta al terminar—, pero dan la falsa
+    #   impresión de que la ejecución ha fallado.
+    for libreria in (
+        "httpx",
+        "httpcore",
+        "prefect.events.utilities",
+        "prefect._internal.concurrency",
+    ):
+        logging.getLogger(libreria).setLevel(logging.CRITICAL)
+
     return logger
 
 

@@ -77,8 +77,8 @@ def calcular_precision(log: pd.DataFrame, modelo: dict, config: dict, metrica: s
         logger.debug(f"Longitud OLP: {len(OLP)}")
         logger.debug(f"DFR: {DFR}")
         logger.debug(f"Longitud DFR: {len(DFR)}")
-        logger.debug(f"|OLP \ DFR|: {caminos_perdidos}")
-        logger.debug(f"Longitud |OLP \ DFR|: {len(caminos_perdidos)}")
+        logger.debug(rf"|OLP \ DFR|: {caminos_perdidos}")
+        logger.debug(rf"Longitud |OLP \ DFR|: {len(caminos_perdidos)}")
 
     logger.info(f"Calculando precisión: {precision:.2f}")
 
