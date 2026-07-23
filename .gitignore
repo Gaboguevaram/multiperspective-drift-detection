@@ -1,15 +1,72 @@
+# =============================================================================
+#  Capas de datos
+# =============================================================================
+# Se ignora el CONTENIDO de cada capa, no el directorio, para poder versionar su
+# .gitkeep y que la estructura de carpetas viaje en el clon. Git no desciende
+# dentro de un directorio excluido, así que ignorar "/data/06_models" impediría
+# versionar "/data/06_models/.gitkeep" aunque se añadiese una negación.
+/data/02_intermediate/*
+!/data/02_intermediate/.gitkeep
+/data/03_primary/*
+!/data/03_primary/.gitkeep
+/data/04_feature/*
+!/data/04_feature/.gitkeep
+/data/05_model_input/*
+!/data/05_model_input/.gitkeep
+/data/06_models/*
+!/data/06_models/.gitkeep
+/data/07_model_output/*
+!/data/07_model_output/.gitkeep
+/data/08_reporting/*
+!/data/08_reporting/.gitkeep
+
+# Batería pública de control flow (benchmark de Maaradji, ~1.2 GB). No se
+# versiona: se descarga del repositorio público indicado en el README de
+# data/01_raw/control_flow/recurring/. Solo hace falta para reproducir la
+# comparativa contra el estado del arte.
+/data/01_raw/control_flow/recurring/*.xes
+/data/01_raw/control_flow/recurring/*.zip
+
+# Logs sintéticos de la validación del motor de ajuste de distribuciones. Se
+# generan con src/log_generation/resource_productivity/Caso_*/generador_no_drift.py
+/data/01_raw/resource_productivity/Caso_*/
+
+# =============================================================================
+#  Salidas de ejecución
+# =============================================================================
+/logs/*
+!/logs/.gitkeep
+/resultados/*
+!/resultados/.gitkeep
+/conf/pruebas/*
+!/conf/pruebas/.gitkeep
+
+# Salidas de los scripts de barrido de ventana
+/tests/**/salida_*/
+optimizacion_calendar
+optimizacion_arrival_rate
+
+# Avisos que emite Prosimos al simular
+simulation_warnings.txt
+
+# Modelos serializados de arrival_rate / service_rate
+*.joblib
+
+# =============================================================================
+#  Documentación no versionada
+# =============================================================================
 /docs
+TFG.pdf
+GuionPresentacionTFG.pdf
+prompt.md
+Anotaciones.md
 
-# --- Datos ---
-/data/02_intermediate
-/data/03_primary
-/data/04_feature
-/data/05_model_input
-/data/06_models
-/data/07_model_output
-/data/08_reporting
+# Carpeta de trabajo con las figuras de la memoria (rotuladas en español).
+imagenes/
 
-# --- Extras ---
+# =============================================================================
+#  Scripts auxiliares de figuras (no forman parte del framework)
+# =============================================================================
 /tests/arrival_rate/figura_trayectoria.py
 /tests/calendar/figura_trayectoria.py
 /tests/service_rate/figura_trayectoria.py
@@ -18,33 +75,34 @@
 /tests/resource_utilization/figura_trayectoria.py
 /tests/mosaico_trayectorias.py
 
-# --- Auxiliares ---
-*.txt
-
-# --- Python/Build ---
+# =============================================================================
+#  Python / build
+# =============================================================================
+__pycache__/
+*.py[cod]
+*.so
+.Python
 build/
 dist/
 *.egg-info/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
 .eggs/
+.env
+.venv/
+venv/
+.ipynb_checkpoints/
+.pytest_cache/
 
-# --- Salida ---
-/logs/*
-!/logs/.gitkeep
-/resultados/*
-!/resultados/.gitkeep
+# =============================================================================
+#  Editor / SO
+# =============================================================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
-/conf/pruebas/*
-!/conf/pruebas/.gitkeep
-optimizacion_calendar
-optimizacion_arrival_rate
-prompt.md
-Anotaciones.md
-
-# --- LaTeX ---
+# =============================================================================
+#  LaTeX
+# =============================================================================
 *.aux
 *.log
 *.toc
@@ -60,14 +118,3 @@ Anotaciones.md
 *.snm
 *.vrb
 *-eps-converted-to.pdf
-
-# --- Python cache ---
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-.env
-.venv
-.vscode

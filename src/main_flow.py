@@ -1,8 +1,28 @@
 from collections import deque
 import os
 
+# Configuración de Prefect. Debe hacerse ANTES de importar prefect, porque las
+# settings se resuelven y cachean en el import.
+#
+# Por defecto se ejecuta en modo efímero: Prefect levanta un servidor temporal
+# mientras dura la ejecución y lo apaga al terminar, de modo que el framework
+# funciona en un clon recién descargado sin arrancar nada previamente.
+#
+# Para ello hay que fijar PREFECT_API_URL a cadena vacía y no simplemente dejarla
+# sin definir, porque el perfil del usuario (~/.prefect/profiles.toml) puede
+# declarar un servidor propio; si ese servidor no está levantado, la ejecución
+# aborta. La variable de entorno tiene precedencia sobre el perfil, así que
+# vaciarla garantiza un comportamiento reproducible en cualquier máquina.
+#
+# Quien quiera usar su propio servidor Prefect solo tiene que exportar
+# PREFECT_API_URL antes de lanzar el framework: al estar ya definida en el
+# entorno, se respeta y no se toca.
+if not os.environ.get("PREFECT_API_URL"):
+    os.environ["PREFECT_API_URL"] = ""
+os.environ.setdefault("PREFECT_SERVER_ALLOW_EPHEMERAL_MODE", "true")
+os.environ.setdefault("PREFECT_LOGGING_TO_API_WHEN_MISSING_FLOW", "ignore")
+
 from prefect import task, flow
-os.environ["PREFECT_API_URL"] = "http://127.0.0.1:4200/api"
 
 import pandas as pd
 import pm4py
@@ -13,7 +33,7 @@ from typing import Any, Dict, Optional, Union
 from .registro import REGISTRO_FILTRADO, REGISTRO_TRANSFORMACIONES, REGISTRO_MODELOS, REGISTRO_METRICAS, REGISTRO_DETECCION
 from .registro import DEPENDENCIAS_ENTRE_PERSPECTIVAS
 from .ventana import extraccion_ventana, avanzar_ventana, comprobar_condicion_finalizacion, validar_ventanas, resolver_ventana_perspectiva
-from .config import cargar_parametros
+from .config import cargar_parametros, asegurar_directorios_salida
 from .logging_config import setup_logging, get_logger
 from .concept_drift_detection import obtener_traza_mas_nueva
 from .ajuste_ventana import (
@@ -1150,8 +1170,17 @@ def orquestador_multidimensional(config: dict, log: Optional[pd.DataFrame] = Non
         log: DataFrame opcional con un log ya cargado (omite la lectura desde disco).
     """
 
+    # Crear las capas de data/ y los directorios de salida si no existen. El pipeline
+    # escribe en ellas desde muchos puntos, y en un repositorio recién clonado no existen.
+    asegurar_directorios_salida()
+
     # Cargar la configuración global
     parametros_globales = config['configuracion_global']
+
+    # Silenciar las barras de progreso de pm4py salvo en modo depuración: se emite una
+    # por iteración, de modo que en una ejecución completa inundan la salida.
+    if not parametros_globales.get('debug', False):
+        pm4py.util.constants.SHOW_PROGRESS_BAR = False
 
     # Cargar el log
     if log is None:

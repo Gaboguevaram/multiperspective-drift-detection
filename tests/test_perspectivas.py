@@ -5,10 +5,17 @@ import os
 
 import pm4py
 
-os.environ["PREFECT_API_URL"] = "http://127.0.0.1:4200/api"
+# Modo efímero de Prefect por defecto. Ver la nota extensa de src/main_flow.py:
+# se vacía PREFECT_API_URL (en vez de dejarla sin definir) para que el perfil del
+# usuario no imponga un servidor que quizá no esté levantado. Si el usuario exporta
+# PREFECT_API_URL explícitamente, se respeta.
+if not os.environ.get("PREFECT_API_URL"):
+    os.environ["PREFECT_API_URL"] = ""
+os.environ.setdefault("PREFECT_SERVER_ALLOW_EPHEMERAL_MODE", "true")
+os.environ.setdefault("PREFECT_LOGGING_TO_API_WHEN_MISSING_FLOW", "ignore")
 
 from src.main_flow import orquestador_multidimensional
-from src.config import cargar_parametros
+from src.config import cargar_parametros, asegurar_directorios_salida
 from src.logging_config import setup_logging, get_logger
 
 # Configurar el sistema de logging centralizado
@@ -101,6 +108,9 @@ def calcular_metricas_tesis(cambios_reales: list, detecciones: list, tolerancia:
     return TP, FP, FN, precision, recall, f_score, retardo_medio
 
 def probar_perspectiva(ruta_log: str, config: dict, tolerancia_error: float, nombre_perspectiva: str = 'control_flow'):
+
+    # Crear las capas de data/ y los directorios de salida si no existen.
+    asegurar_directorios_salida()
 
     # Cargar (csv o xes)
     extension_log = os.path.splitext(ruta_log)[1].lower()
@@ -260,13 +270,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Herramienta de minería de procesos multiperspectiva')
 
     # Fichero log
-    parser.add_argument('-l', '--log', help='Indica el nombre del log sobre el cual hacer el test ',type=str, default="./data/01_raw/ORI-2500.xes")
+    parser.add_argument('-l', '--log', help='Indica el nombre del log sobre el cual hacer el test ', type=str, default="./data/01_raw/control_flow/single/cb-5000-single.csv")
 
     # Perspectiva a probar
     parser.add_argument('-p', '--perspectiva', help='Indica la perspectiva a probar (control_flow, arrival_rate, service_rate, calendar, resource_utilization, resource_productivity)', type=str, default="control_flow")
 
     # Archivo de configuración
-    parser.add_argument('-f', '--file', help='Indica el archivo de configuración .yml a usar', type=str, default="./conf/ventana_trazas.yml")
+    parser.add_argument('-f', '--file', help='Indica el archivo de configuración .yml a usar', type=str, default="./conf/logs_simples/cf_cb.yml")
 
     args = parser.parse_args()
 
