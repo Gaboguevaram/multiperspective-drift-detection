@@ -34,9 +34,13 @@ not just control flow.**
 
 ### What is an event log?
 
-Organisations run *processes*: a loan application, an insurance claim, a hospital admission. Every
-time a process runs, the IT systems supporting it leave a trail. That trail is an **event log**: a
-table where each row is one activity performed by one resource at one point in time, and rows are
+Organisations run *processes*: a loan application, an insurance claim, a hospital admission. A process
+is a set of activities carried out by a set of resources to reach a goal.
+
+![A business process](docs/img/proceso_negocio.png)
+
+Every time a process runs, the IT systems supporting it leave a trail. That trail is an **event log**:
+a table where each row is one activity performed by one resource at one point in time, and rows are
 grouped into **traces** (also called cases) — one complete execution of the process.
 
 | Case ID | Activity | Resource | Available | Start | End |
@@ -70,6 +74,12 @@ activities execute. But a process is much more than an activity sequence: it inv
 their own working calendars, availability levels, utilisation rates, and case arrival and completion
 dynamics. A change in any of those is a real change in the process, and control flow will not see it.
 
+The choice of perspectives is not arbitrary. A case's cycle time decomposes into processing and
+waiting time, and each branch of that decomposition is driven by a measurable dimension — which is
+exactly what each perspective monitors:
+
+![Cycle-time decomposition and the perspectives it motivates](docs/img/taxonomia_dynamik.png)
+
 Approaches that do go beyond control flow exist — the most notable being **Dynamik**, which starts
 from a rich taxonomy of dimensions — but they are very sensitive to oscillations. **A robust
 multiperspective approach was missing. That is the gap this work addresses.**
@@ -102,6 +112,8 @@ The detection scheme builds on **C2D2**, a control-flow drift detector, and adds
 2. **Post-drift burn-in.** After confirming a change, detection is suspended for a number of
    iterations while the re-mined model stabilises, so the transient values a metric takes while
    moving from the old regime to the new one cannot themselves trigger a spurious detection.
+
+   ![Post-drift burn-in](docs/img/calentamiento_drift.png)
 3. **Generic change localisation** on the window that started the streak, shared by every metric.
    This is what makes the detector metric-agnostic — and, as the results below show honestly, it is
    also the reason the detection *delay* is larger than C2D2's.
@@ -131,6 +143,8 @@ The detection scheme builds on **C2D2**, a control-flow drift detector, and adds
   complementary: *reducing* a shift leaves calendar intervals unsupported (inverted support drops,
   support does not), whereas *extending* one produces events outside the calendar (support drops,
   inverted support does not).
+
+  ![Support vs inverted support](docs/img/ejemplo_soportes_par.png)
 - **RPD** (Resource Performance Deviation) — how fast a resource is at a task relative to that task's
   average duration. It is not a scalar but a **distribution**, one value per execution, compared
   against its reference with the Wasserstein distance.
@@ -186,8 +200,12 @@ recomputed, which is what keeps the stages independent.
 ### Window modes
 
 A window can be defined by **events**, by **traces** or by **time**, and is controlled by three
-parameters: *size*, *stride* and *start*. Windows can be shared by all perspectives (**uni-window**)
-or private to each one (**multi-window**).
+parameters: *size*, *step* (stride) and *start*.
+
+![Sliding window model](docs/img/ejemplo_ventana.png)
+
+Windows can be shared by all perspectives (**uni-window**) or private to each one
+(**multi-window**).
 
 Multi-window matters because perspectives operate at genuinely different granularities: a calendar
 change unfolds over months, a control-flow change over days. The scheduler uses a **minimum-end**

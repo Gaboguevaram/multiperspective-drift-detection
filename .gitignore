@@ -55,13 +55,18 @@ simulation_warnings.txt
 # =============================================================================
 #  Documentación no versionada
 # =============================================================================
-/docs
+# Se ignora el contenido de docs/ salvo las figuras que usa el README (en
+# inglés). Se ignora el contenido, no el directorio, porque git no desciende en
+# un directorio excluido y una negación sobre docs/img no surtiría efecto.
+/docs/*
+!/docs/img
 TFG.pdf
 GuionPresentacionTFG.pdf
 prompt.md
 Anotaciones.md
 
-# Carpeta de trabajo con las figuras de la memoria (rotuladas en español).
+# Carpeta de trabajo con las figuras de la memoria en ambos idiomas. Las que usa
+# el README están copiadas en docs/img/ (versión en inglés) y sí se versionan.
 imagenes/
 
 # =============================================================================
